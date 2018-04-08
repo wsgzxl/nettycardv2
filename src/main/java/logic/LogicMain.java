@@ -20,9 +20,9 @@ import dispatcher.HandlerDispatcher;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê1ÔÂ23ÈÕ ÏÂÎç3:08:16 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½1ï¿½ï¿½23ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3:08:16 
 
-¹ÜÀíÆô¶¯Àà
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
  */
 
@@ -40,18 +40,18 @@ public class LogicMain {
    private LogicMain()
    {
 	   
-	   //ÅäÖÃ´¦Àíhandler
+	   //ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½handler
 	   Map<Integer,GameHandler> handleMap=new LinkedHashMap<Integer,GameHandler>();
 	   
-	   handleMap.put(RequestHandlerId.login.ordinal(), new LoginHandler());
-	   handleMap.put(RequestHandlerId.exit.ordinal(), new ExitHandler());
-	   handleMap.put(RequestHandlerId.createroom.ordinal(), new CreateRoomHandler());
-	   handleMap.put(RequestHandlerId.leaveroom.ordinal(),new LeaverRoomHandler());
-	   handleMap.put(RequestHandlerId.sitdown.ordinal(), new SitDownHandler());
+	   handleMap.put(RequestHandlerId.login.getstate(), new LoginHandler());
+	   handleMap.put(RequestHandlerId.exit.getstate(), new ExitHandler());
+	   handleMap.put(RequestHandlerId.createroom.getstate(), new CreateRoomHandler());
+	   handleMap.put(RequestHandlerId.leaveroom.getstate(),new LeaverRoomHandler());
+	   handleMap.put(RequestHandlerId.sitdown.getstate(), new SitDownHandler());
 	   
 	   handlerdispatcher.setHandlerMap(handleMap);
 	  
-	   //ÏûÏ¢·Ö·¢Æ÷¿ªÊ¼´¦Àí
+	   //ï¿½ï¿½Ï¢ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 	   handlerdispatcher.setMessageExecutor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()*2));
 	  
 	   UserManager.getInstance().setHandlerDispatcher(handlerdispatcher);

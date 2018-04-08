@@ -33,14 +33,13 @@ public class LoginHandler implements GameHandler {
 		try {
 			login.mergeFrom(data);
 		} catch (InvalidProtocolBufferException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(login.getToken()+"--->>"+login.getName()+"--->>"+login.getSex());
 	
 		RichManProto.LoginResponse.Builder loginresult=RichManProto.LoginResponse.newBuilder();
-		loginresult.setErrormessage("java return");
-		loginresult.setSuccess(false);
+		loginresult.setErrormessage("");
+		loginresult.setSuccess(true);
 		byte[] resultdata=loginresult.build().toByteArray();
 	    ResponseMessage message=new ResponseMessage(ResponseHandlerId._addtoroom.getValue(),resultdata);
 	    paramGameRequest.GetChannelContext().writeAndFlush(message);
