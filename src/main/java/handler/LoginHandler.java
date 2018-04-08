@@ -1,16 +1,22 @@
 package handler;
 
+import net.ResponseMessage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import constant.ResponseHandlerId;
+import Protos.RichManProto;
 import domain.GameRequest;
 
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê1ÔÂ23ÈÕ ÏÂÎç2:19:58 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½1ï¿½ï¿½23ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½2:19:58 
 
-µÇÂ¼´¦Àí°ü username+password
+ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ username+password
 
  */
 
@@ -23,9 +29,21 @@ public class LoginHandler implements GameHandler {
 		
 		logger.info("LoginHandler is startprocess!");
 		byte[] data=paramGameRequest.GetMessage().getData();
-		/*
-		 * ×ö¿Í»§¶ËÓ¦´ð
-		 */
-	}
+		RichManProto.LoginRequest.Builder login=RichManProto.LoginRequest.newBuilder();
+		try {
+			login.mergeFrom(data);
+		} catch (InvalidProtocolBufferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(login.getToken()+"--->>"+login.getName()+"--->>"+login.getSex());
 	
+		RichManProto.LoginResponse.Builder loginresult=RichManProto.LoginResponse.newBuilder();
+		loginresult.setErrormessage("java return");
+		loginresult.setSuccess(false);
+		byte[] resultdata=loginresult.build().toByteArray();
+	    ResponseMessage message=new ResponseMessage(ResponseHandlerId._addtoroom.getValue(),resultdata);
+	    paramGameRequest.GetChannelContext().writeAndFlush(message);
+		
+	}
 }

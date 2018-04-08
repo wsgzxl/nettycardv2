@@ -33,17 +33,17 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 		{
 		super.handlerAdded(ctx);
         
-		//½øÈëºóÏÈ¹¹ÔìÒ»¸öuser¶ÔÏó
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¹ï¿½ï¿½ï¿½Ò»ï¿½ï¿½userï¿½ï¿½ï¿½ï¿½
 		User user=new User();
 		user.setChannelHandler(ctx);
 		UserManager.getInstance().addUser(user);
 		
 		
-		logger.info("½øÀ´ÁËÒ»¸öÁ¬½Ó:"+ctx.channel().id().toString());
+		logger.info("æ–°è¿›æ¥ä¸€ä¸ªè¿æ¥:"+ctx.channel().id().toString());
 		
 		}catch(Exception ex)		
 		{
-		   logger.error("Òì³£ĞÅÏ¢:"+ex);
+		   logger.error("ï¿½ì³£ï¿½ï¿½Ï¢:"+ex);
 	    }
 	}
 	
@@ -55,17 +55,17 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 	    
 		   super.handlerRemoved(ctx);
 	       
-		   //É¾³ı´ËÁ´½ÓµÄÏûÏ¢¶ÓÁĞ,µ«ÊÇ²»É¾³ıÓÃ»§£¬ÊÇÎªÁËÕâ¸öÓÃ»§×Ô¶¯ÖØÁ¬
+		   //É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ç²ï¿½É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		   //UserManager.getInstance().removeMessageQueue(ctx);
 		   
-		   //É¾³ı
+		   //É¾ï¿½ï¿½
 		   UserManager.getInstance().removeUser(ctx);
 		   
-		   logger.info("É¾³ıÁËÒ»¸öÁ¬½Ó:"+ctx.channel().id().toString());
+		   logger.info("É¾ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+ctx.channel().id().toString());
 		
 		}catch(Exception ex)		
 		{
-		   logger.error("Òì³£ĞÅÏ¢:"+ex);
+		   logger.error("ï¿½ì³£ï¿½ï¿½Ï¢:"+ex);
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 		/*ByteBuf buf = (ByteBuf)msg;
 		byte[] req = new byte[buf.readableBytes()];
 		buf.readBytes(req);
-        ReferenceCountUtil.release(msg);//»ØÊÕ
+        ReferenceCountUtil.release(msg);//ï¿½ï¿½ï¿½ï¿½
 */        
        
 		/*String body = new String(req,"UTF-8");
@@ -98,7 +98,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 		
 	}catch(Exception ex)
 	{
-		logger.error("Òì³£ĞÅÏ¢:"+ex);
+		logger.error("ï¿½ì³£ï¿½ï¿½Ï¢:"+ex);
 	}
 }
 	
@@ -113,12 +113,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 		try
 		{
 	
-		logger.info(ctx.channel().id()+"Òì³£¶Ï¿ª");
+		logger.info(ctx.channel().id()+"ï¿½ì³£ï¿½Ï¿ï¿½");
 	    cause.printStackTrace();
 		
 	    ctx.close();
 	 
-		//É¾³ı´ËÁ´½ÓµÄÏûÏ¢¶ÓÁĞ,µ«ÊÇ²»É¾³ıÓÃ»§£¬ÊÇÎªÁËÕâ¸öÓÃ»§×Ô¶¯ÖØÁ¬
+		//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ç²ï¿½É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
         //UserManager.getInstance().removeMessageQueue(ctx);
 		
 		}

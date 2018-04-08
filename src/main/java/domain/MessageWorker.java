@@ -50,7 +50,7 @@ public class MessageWorker implements Runnable {
 		if (handler != null) {
 			handler.execute(this.request);
 		} else {
-			logger.info("û���ҵ����ʵĴ������!");
+			logger.info("未找到处理handler!");
 		}
 	}
 

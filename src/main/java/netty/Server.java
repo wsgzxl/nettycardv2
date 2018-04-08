@@ -40,16 +40,19 @@ public class Server{
     
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
+        		
         try {
         	
         	/*RichManProto.LoginRequest.Builder request=RichManProto.LoginRequest.newBuilder();
-        	request.mergeFrom(new byte[]{0x8,(byte) 0x8f,0x4e,0x12,0x4,0x67,0x61,0x6d,0x65,0x1a,0x3,0x31,0x32,0x33});
+        	request.mergeFrom(new byte[]{0x8,(byte)0xd0,0xf,0x12,0x4,0x67,0x61,0x6d,0x65,0x1a,0xf,0x6c,0x61,0x6f,0x6c,0x6f,0x6e,0x67,0x40,0x31,0x36,0x33,0x2e,0x63,0x6f,0x6d});
         	System.out.println(request.getId());
         	System.out.println(request.getEmail());
-        	System.out.println(request.getName());
-        	request.setId(9999);
+        			
+        	System.out.println(request.getName());*/
+        	
+        	/*request.setId(2000);
         	request.setName("game");
-        	request.setEmail("123");
+        	request.setEmail("laolong@163.com");
         	byte[] data=request.build().toByteArray();
         	String datastr="";
         	for(int i=0;i<data.length;i++)

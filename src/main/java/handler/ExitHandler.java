@@ -3,12 +3,15 @@ package handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+
+import Protos.RichManProto;
 import domain.GameRequest;
 
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê1ÔÂ24ÈÕ ÏÂÎç6:30:27 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½1ï¿½ï¿½24ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½6:30:27 
 
  */
 
@@ -20,7 +23,15 @@ public class ExitHandler implements GameHandler {
 	public void execute(GameRequest paramGameRequest) {
 	    
 		logger.info("ExitHandler is startprocess!");
-		
+		byte[] data=paramGameRequest.GetMessage().getData();
+		RichManProto.LoginResponse.Builder response=RichManProto.LoginResponse.newBuilder();
+		try {
+			response.mergeFrom(data);
+		} catch (InvalidProtocolBufferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(response.getSuccess()+"--->"+response.getErrormessage());
 	}
 
 }

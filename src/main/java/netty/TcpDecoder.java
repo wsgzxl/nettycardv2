@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import core.Common;
 import net.RequestMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -22,24 +23,32 @@ public class TcpDecoder extends ByteToMessageDecoder  {
        
 		try
 		{
-		 
+		    int readableBytes=in.readableBytes();
+		    System.out.println("readableBytes="+readableBytes);
 			if(in.readableBytes()<4)
 			{
 				return;
 			}
 			in.markReaderIndex();
-			int totalLength=in.readInt();
+			byte[] data=new byte[4];
+			in.readBytes(data);
+			int totalLength=Common.byteArrayToInt(data);
+			System.out.println("totalLength:"+totalLength);
 			if(in.readableBytes()<totalLength)
 			{
 				in.resetReaderIndex();
 				return;
 			}
 			
-			int requestId=in.readUnsignedShort();
-			int bodylength=totalLength-2;
+			byte[] dataid=new byte[4];
+			in.readBytes(dataid);
+			int requestId=Common.byteArrayToInt(dataid);
+			System.out.println("requestId:"+requestId);
+			int bodylength=totalLength-4;
 			byte[] bodydata=new byte[bodylength];
 			in.readBytes(bodydata);
 			out.add(new RequestMessage(requestId,bodydata));
+			
 		}
 		catch(Exception ex)
 		{

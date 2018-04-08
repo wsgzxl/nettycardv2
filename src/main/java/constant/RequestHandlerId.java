@@ -3,20 +3,29 @@ package constant;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê1ÔÂ23ÈÕ ÏÂÎç3:16:02 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½1ï¿½ï¿½23ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3:16:02 
 
-¿Í»§¶ËÇëÇóÏûÏ¢
+è¯·æ±‚ç™»å½•æ¶ˆæ¯IDï¼Œç”¨æ¥åŒºåˆ«æ¶ˆæ¯
 
  */
 
 public enum RequestHandlerId {
    
-	login,//µÇÂ¼ÏûÏ¢
-	exit,//ÍË³öÏûÏ¢
-	createroom,//´´½¨·¿¼ä
-	intoroom,//¼ÓÈë·¿¼ä
-	leaveroom,//Àë¿ª·¿¼ä
-	sitdown,//×øÏÂ
-	startgame,//¿ªÊ¼ÓÎÏ·
+	login(1),//ç™»å½•æ¸¸æˆ
+	exit(2),//é€€å‡ºæ¸¸æˆ
+	createroom(3),//åˆ›å»ºæˆ¿é—´
+	joinroom(4),//è¿›å…¥æˆ¿é—´
+	leaveroom(5),//ç¦»å¼€æˆ¿é—´
+	sitdown(6),//åä¸‹
+	startgame(7); //å¼€å§‹æ¸¸æˆ
 	
+	private int state=0;
+	private RequestHandlerId(int value)
+	{
+		state=value;
+	}
+	public int getstate()
+	{
+		return state;
+	}
 }

@@ -1,5 +1,6 @@
 package netty;
 
+import core.Common;
 import net.ResponseMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,7 +17,17 @@ public class TcpEncoder extends MessageToByteEncoder<ResponseMessage> {
 		{
 		   byte[] data=message.toByteArray();
 		   int length=data.length;
-		   out.writeInt(length);
+		   int len=length+4;
+		   byte[] value=Common.intToByteArray(len);
+		   out.writeByte(value[3]);
+		   out.writeByte(value[2]);
+		   out.writeByte(value[1]);
+		   out.writeByte(value[0]);
+		   value=Common.intToByteArray(message.getId());
+		   out.writeByte(value[3]);
+		   out.writeByte(value[2]);
+		   out.writeByte(value[1]);
+		   out.writeByte(value[0]);
 		   out.writeBytes(data);
 		}catch(Exception ex)
 		{

@@ -21,9 +21,9 @@ import domain.GameResponse;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê2ÔÂ6ÈÕ ÏÂÎç3:23:07 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½2ï¿½ï¿½6ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3:23:07 
 
-ÇëÇó´´½¨·¿¼ä
+ï¿½ï¿½ï¿½ó´´½ï¿½ï¿½ï¿½ï¿½ï¿½
 
  */
 
@@ -37,7 +37,7 @@ public class CreateRoomHandler implements GameHandler{
 		logger.info("CreateRoom is startprocess!");
 		int roomid=RoomManager.getInstance().createRoom();
 	  
-		//´´½¨·¿¼äµÄÓÃ»§Ä¬ÈÏ×øÏÂ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		UserManager.getInstance().getUser(paramGameRequest.GetChannelContext()).setSitDownState(SitDownAndUp.down);
 	    
 		ObjectToBytes objecttobytes=new ObjectToBytes();

@@ -1,5 +1,10 @@
 package netty;
 
+import java.nio.ByteBuffer;
+
+import core.Common;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -20,8 +25,28 @@ public class ProtoBufServerHandler extends ChannelInboundHandlerAdapter
 	
 	  @Override
 	  public void channelRead(ChannelHandlerContext ctx,Object msg) throws Exception{
-		  RichManProto.LoginRequest request=(RichManProto.LoginRequest)msg;
+		  /*RichManProto.LoginRequest request=(RichManProto.LoginRequest)msg;
 		  System.out.println(request.getId()+">"+request.getName()+"->"+request.getEmail());
+		  
+		  RichManProto.LoginResponse.Builder response=RichManProto.LoginResponse.newBuilder();
+		  response.setId(66666);
+		  
+		  ByteBuf buff=Unpooled.buffer();
+		  byte[] buffer=response.build().toByteArray();
+		 
+		  buff.writeByte((byte)(buffer.length+4));
+		  buff.writeByte(0);
+		 
+		  byte[] d1=Common.int2Byte(buffer.length);
+		  buff.writeByte(d1[3]);
+		  buff.writeByte(d1[2]);
+		  buff.writeByte(d1[1]);
+		  buff.writeByte(d1[0]);
+		  
+		
+		  buff.writeBytes(buffer);
+		  ctx.writeAndFlush(buff);*/
+		  
 	  }
 	  
 	  @Override
