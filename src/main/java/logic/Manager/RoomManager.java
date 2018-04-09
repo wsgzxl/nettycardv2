@@ -11,6 +11,7 @@ import net.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import Protos.addroomproto;
 import constant.ResponseHandlerId;
 import core.ObjectToBytes;
 import logic.Room;
@@ -75,19 +76,23 @@ public class RoomManager {
 			logger.info("请求登录消息: roomid:"+roomid+ "user:"+ user);
 			return;
 		}
+	
+		addroomproto.LoginRoomResponse.Builder loginroomresponse=addroomproto.LoginRoomResponse.newBuilder();
 		synchronized (lockobj) {
 			if (rooms.containsKey(roomid)) {
 				rooms.get(roomid).addUser(user);
-				ResponseMessage message=new ResponseMessage(
-					ResponseHandlerId._addtoroom.ordinal(),null);
-				
+				loginroomresponse.setErrormessage("");
+				loginroomresponse.setSuccess(true);
 			} else {
-				ResponseMessage message = new ResponseMessage(
-						ResponseHandlerId._nofindroom.ordinal(), null);
+				loginroomresponse.setErrormessage("未找到房间!");
+				loginroomresponse.setSuccess(false);
 				logger.info("未找到房间:"+roomid);
-				user.Send(message);
 			}
+			byte[] data=loginroomresponse.build().toByteArray();
+			ResponseMessage addroomresult=new ResponseMessage(ResponseHandlerId._addroomresult.getState(),data);
+			user.Send(addroomresult);
 		}
+		
 	}
 
 	/**
@@ -102,10 +107,10 @@ public class RoomManager {
 				rooms.get(roomid).remoUser(user);
 				
 			} else {
-				ResponseMessage message = new ResponseMessage(
+			/*	ResponseMessage message = new ResponseMessage(
 						ResponseHandlerId._nofindroom.ordinal(), null);
 				logger.info("δ�ҵ������:"+roomid);
-				user.Send(message);
+				user.Send(message);*/
 			}
 		}
 	}
@@ -119,9 +124,9 @@ public class RoomManager {
 				rooms.remove(roomid);
 			} else {
 				logger.error("�쳣:δ�ҵ������" + roomid);
-				ResponseMessage message = new ResponseMessage(
+				/*ResponseMessage message = new ResponseMessage(
 			    ResponseHandlerId._nofindroom.ordinal(), null);
-				user.Send(message);
+				user.Send(message);*/
 			}
 		}
 	}

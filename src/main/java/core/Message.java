@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf;
  * @qq: 1357098586
  * @email: 1357098586@qq.com
  * 
- * 协议内容  包长度(4 bytes)+id(2 bytes)+data(byte[])
+ * 协议内容  包长度(4 bytes)+id(4 bytes)+data(byte[])
  * 
  * 收发消息都是Message
  */
@@ -38,24 +38,6 @@ public class Message {
 
 	public void setData(byte[] data) {
 		this.data = data;
-	}
-	
-	/**
-	 * 包体不能大于65536
-	 * @return
-	 */
-	public byte[] toByteArray() throws Exception{
-		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-		DataOutputStream output = new DataOutputStream(byteStream);
-		output.writeShort(this.id);
-		if(this.data!=null)
-		{
-		   for(int i=0;i<this.data.length;i++) {
-			  output.writeByte(this.data[i]);
-		   }
-		}
-	    output.flush();
-		return byteStream.toByteArray();
 	}
 	
 	public String toString()

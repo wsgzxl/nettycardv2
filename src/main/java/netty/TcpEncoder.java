@@ -15,19 +15,15 @@ public class TcpEncoder extends MessageToByteEncoder<ResponseMessage> {
 			throws Exception {
 		try
 		{
-		   byte[] data=message.toByteArray();
+		   byte[] data=message.getData();
 		   int length=data.length;
-		   int len=length+4;
+		   int len=length+8;
 		   byte[] value=Common.intToByteArray(len);
-		   out.writeByte(value[3]);
-		   out.writeByte(value[2]);
-		   out.writeByte(value[1]);
-		   out.writeByte(value[0]);
+		   out.writeBytes(value);
 		   value=Common.intToByteArray(message.getId());
-		   out.writeByte(value[3]);
-		   out.writeByte(value[2]);
-		   out.writeByte(value[1]);
-		   out.writeByte(value[0]);
+           out.writeBytes(value);
+		   value=Common.intToByteArray(data.length);
+		   out.writeBytes(value);
 		   out.writeBytes(data);
 		}catch(Exception ex)
 		{

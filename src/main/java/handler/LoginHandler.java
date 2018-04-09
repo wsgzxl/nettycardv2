@@ -54,9 +54,9 @@ public class LoginHandler implements GameHandler {
 			logger.info("登录成功");
 		}
 		byte[] resultdata = loginresult.build().toByteArray();
-		ResponseMessage message = new ResponseMessage(
+		/*ResponseMessage message = new ResponseMessage(
 				ResponseHandlerId._addtoroom.getValue(), resultdata);
-		paramGameRequest.GetChannelContext().writeAndFlush(message);
+		paramGameRequest.GetChannelContext().writeAndFlush(message);*/
 		
 	}
 }

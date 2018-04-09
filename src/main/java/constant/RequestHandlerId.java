@@ -12,12 +12,13 @@ package constant;
 public enum RequestHandlerId {
    
 	login(1),//登录游戏
-	exit(2),//退出游戏
-	createroom(3),//创建房间
-	joinroom(4),//加入房间
-	leaveroom(5),//离开房间
-	sitdown(6),//坐下
-	startgame(7); //开始游戏
+	createroom(2),//创建房间
+	joinroom(3),//加入房间
+	leaveroom(4),//离开房间
+	sitdown(5),//坐下
+	startgame(6), //开始游戏
+	
+	exit(7);//退出游戏
 	
 	private int state=0;
 	private RequestHandlerId(int value)

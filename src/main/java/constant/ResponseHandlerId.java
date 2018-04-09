@@ -12,21 +12,21 @@ package constant;
 public enum ResponseHandlerId {
 
      _createroom(128),//创建房间
-	 _nofindroom(129),//未找到房间
-     _addtoroom(130),//进入房间
+	 _addroomresult(129),//添加到房间结果返回
+    
      _leavetoroom(131), //离开房间
      _roomfull(132),// 房间人数已满
      _loginresult(133);//登录结果返回
      
-     private final int value;
+     private final int state;
      
      private ResponseHandlerId(int value)
      {
-    	 this.value=value;
+    	 this.state=value;
      }
      
-     public int getValue()
+     public int getState()
      {
-    	 return value;
+    	 return state;
      }
 }
