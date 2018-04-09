@@ -18,18 +18,18 @@ import net.ResponseMessage;
 import logic.User;
 
 /*
- *  ÓÃ»§¹ÜÀíÀà
+ *  ç”¨æˆ·ç®¡ç†
  */
 
 public class UserManager {
 
 	private Logger logger=LoggerFactory.getLogger(getClass());
 	
-	private static UserManager _instance=new UserManager();//·ÀÖ¹²¢·¢´øÀ´µÄËø£¬ËùÒÔÖ±½Ónew
+	private static UserManager _instance=new UserManager();//new
 	
-	private ConcurrentHashMap<Integer,User> players=new ConcurrentHashMap<Integer,User>();//ËùÓĞÍæ¼Ò
+	private ConcurrentHashMap<Integer,User> players=new ConcurrentHashMap<Integer,User>();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	private ConcurrentHashMap<ChannelHandlerContext,User> cus=new ConcurrentHashMap<ChannelHandlerContext,User>();//Íæ¼ÒµÄchannelcontext,user
+	private ConcurrentHashMap<ChannelHandlerContext,User> cus=new ConcurrentHashMap<ChannelHandlerContext,User>();//ï¿½ï¿½Òµï¿½channelcontext,user
 	
 	private HandlerDispatcher handlerDispatcher;
 	
@@ -44,20 +44,22 @@ public class UserManager {
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞµÄÓÃ»§
+	 * è¿”å›ç©å®¶
 	 * @return
 	 */
 	public Map<Integer,User> getUser(){
 		return players;
 	}
 	
-	//·¢ËÍÏûÏ¢¸øÖ¸¶¨Íæ¼Ò
+	/*
+	 * ç»™å•ä¸ªç”¨æˆ·å‘é€æ¶ˆæ¯
+	 */
 	public void sendMessage(User user,ResponseMessage message)
 	{
 		user.Send(message);
 	}
 	
-	//·¢ËÍÏûÏ¢¸ø¶à¸öÍæ¼Ò
+	//ç»™å‡ ä¸ªç”¨æˆ·å‘æ¶ˆæ¯
 	public void sendUsers(User[] users,ResponseMessage message)
 	{
 		for(int i=0;i<users.length;i++)
@@ -66,7 +68,7 @@ public class UserManager {
 		}
 	}
 	
-	//·¢ËÍ¸øËùÓĞÍæ¼Ò
+	//å¹¿æ’­æ¶ˆæ¯
 	public void sendAll(ResponseMessage message)
 	{
 		for(User user : players.values())
@@ -75,14 +77,14 @@ public class UserManager {
 	    }
 	}
 	
-	//Ìí¼ÓÓÃ»§
+	//æ·»åŠ ç”¨æˆ·
 	public  void addUser(User user)
 	{
 		 players.put(user.hashCode(),user);
 		 cus.put(user.getHandlerContext(),user);
 	}
 	
-	//É¾³ıÓÃ»§
+	//åˆ é™¤ç”¨æˆ·
 	public  void removeUser(User user)
 	{
 		players.remove(user.hashCode());
@@ -90,7 +92,7 @@ public class UserManager {
 	}
 	
 	/**
-	 * ·µ»ØÍæ¼ÒµÄctx
+	 * æ ¹æ®ctxæŸ¥æ‰¾ç”¨æˆ·
 	 * @param ctx
 	 * @return
 	 */
@@ -99,21 +101,23 @@ public class UserManager {
 		return cus.get(ctx);
 	}
 	
-	//»ñÈ¡ÓÃ»§ÊıÁ¿
+	/*
+	 * è¿”å›ç”¨æˆ·æ•°é‡
+	 */
 	public int getUserCount()
 	{
 		return players.size();
 	}
 	
 	/*
-	 * ÉèÖÃÏûÏ¢´¦ÀíÆ÷
+	 * è®¾ç½®æ¶ˆæ¯åˆ†å‘å™¨
 	 */
 	public void setHandlerDispatcher(HandlerDispatcher handlerDispatcher){
 		this.handlerDispatcher=handlerDispatcher;
 	}
 	
     /*
-     * ÎªÁ´½ÓÌí¼ÓÏûÏ¢¶ÓÁĞ
+     * æ·»åŠ æ¶ˆæ¯
      */
     
     public void addMessageQueue(GameRequest request){
@@ -123,16 +127,15 @@ public class UserManager {
     }
     
     /*
-     * ÎªÁ´½ÓÉ¾³ıÏûÏ¢¶ÓÁĞ
+     * åˆ é™¤æŸä¸ªé“¾æ¥çš„æ‰€æœ‰æ¶ˆæ¯
      */
     private void removeMessageQueue(ChannelHandlerContext channel)
     {
-    	//TODOµ±Á´½Ó¶Ï¿ªµÄÊ±ºòÇå¿Õ¶ÓÁĞ
-    	
+    	//TODO:åˆ é™¤æ¶ˆæ¯
     }
     
     /*
-     * É¾³ıÕâ¸öÓÃ»§
+     * æ ¹æ®ctxåˆ é™¤ç”¨æˆ·
      */
     public void removeUser(ChannelHandlerContext ctx){
     	User user=cus.remove(ctx);

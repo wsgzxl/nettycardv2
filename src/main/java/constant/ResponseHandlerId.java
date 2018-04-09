@@ -3,20 +3,20 @@ package constant;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê2ÔÂ6ÈÕ ÏÂÎç3:51:13 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½2ï¿½ï¿½6ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3:51:13 
 
-»Ø·¢¸ø¿Í»§¶ËµÄÏûÏ¢
+ï¿½Ø·ï¿½ï¿½ï¿½Í»ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ï¢
 
  */
 
 public enum ResponseHandlerId {
 
-     _createroom(128),//´´½¨·¿¼ä³É¹¦
-	 _nofindroom(129),//Ã»ÓÐ´Ë·¿¼ä
-     _addtoroom(130),//Ìí¼Óµ½·¿¼ä
-     _leavetoroom(131), //Àë¿ª·¿¼ä
-     _roomfull(132),//·¿¼äÈËÊýÂú
-     _beforegame(133);//ÓÎÏ·Î´¿ªÊ¼ÏûÏ¢
+     _createroom(128),//åˆ›å»ºæˆ¿é—´
+	 _nofindroom(129),//æœªæ‰¾åˆ°æˆ¿é—´
+     _addtoroom(130),//è¿›å…¥æˆ¿é—´
+     _leavetoroom(131), //ç¦»å¼€æˆ¿é—´
+     _roomfull(132),// æˆ¿é—´äººæ•°å·²æ»¡
+     _loginresult(133);//ç™»å½•ç»“æžœè¿”å›ž
      
      private final int value;
      

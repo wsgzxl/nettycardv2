@@ -3,12 +3,12 @@ package core;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê2ÔÂ8ÈÕ ÏÂÎç3:57:36 
+
 
  */
 
 public class GlobalData {
 
-	
+	public static int maxcount=1000;//æ”¯æŒæˆ¿é—´æœ€å¤šäººæ•°
 	
 }

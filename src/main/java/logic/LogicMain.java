@@ -3,6 +3,7 @@ package logic;
 import handler.CreateRoomHandler;
 import handler.ExitHandler;
 import handler.GameHandler;
+import handler.JoinRoomHandler;
 import handler.LeaverRoomHandler;
 import handler.LoginHandler;
 import handler.SitDownHandler;
@@ -48,6 +49,7 @@ public class LogicMain {
 	   handleMap.put(RequestHandlerId.createroom.getstate(), new CreateRoomHandler());
 	   handleMap.put(RequestHandlerId.leaveroom.getstate(),new LeaverRoomHandler());
 	   handleMap.put(RequestHandlerId.sitdown.getstate(), new SitDownHandler());
+	   handleMap.put(RequestHandlerId.joinroom.getstate(), new JoinRoomHandler());
 	   
 	   handlerdispatcher.setHandlerMap(handleMap);
 	  

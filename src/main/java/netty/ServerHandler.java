@@ -61,7 +61,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter{
 		   //ɾ��
 		   UserManager.getInstance().removeUser(ctx);
 		   
-		   logger.info("ɾ����һ������:"+ctx.channel().id().toString());
+		   logger.info("退出一个链接:"+ctx.channel().id().toString());
 		
 		}catch(Exception ex)		
 		{

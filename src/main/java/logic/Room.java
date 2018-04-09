@@ -123,7 +123,7 @@ public class Room {
 		{
 			for(int j=0;j<users.size();j++)
 			{
-		    	users.get(j).Send(users.get(i).getBeforeGameMessage());
+		    	//users.get(j).Send(users.get(i).getBeforeGameMessage());
 			}
 		}
 		

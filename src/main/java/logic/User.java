@@ -15,7 +15,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 
 /*
- * ÓÃ»§Àà
+ * ç”¨æˆ·ç±»
  * 
  */
 
@@ -23,49 +23,44 @@ public class User {
    
 	 private Logger logger=LoggerFactory.getLogger(getClass());
 	
-	private int weixinid=-1;//Íæ¼ÒÎ¢ĞÅID
-	 
-	 public int getId()
+	 private int token=-1;//token
+	
+	 public int getToken()
 	 {
-		 return weixinid;
+		 return token;
 	 }
 	 
-	 private String name="";//Íæ¼ÒĞÕÃû
+	 private String name="";//ç©å®¶å
 	 
 	 public String getName()
 	 {
 		 return name;
 	 }
 	 
-	 private int roomindex=0;//Íæ¼ÒÔÚ×À×ÓÉÏµÄĞòºÅ
-	 
-	 public int getRoomIndex()
+	 public void setName(String name)
 	 {
-		 return roomindex;
-	 }
-	 
-	 /**
-	  * 
-	  * @param index
-	  */
-	 public void setRoomIndex(int index)
-	 {
-		 roomindex=index;
+		 this.name=name;
 	 }
 	 
 	 private SitDownAndUp sitdown;
 	 
+	 /*
+	  * è®¾ç½®ç›®å‰çŠ¶æ€
+	  */
 	 public SitDownAndUp getSitDownState()
 	 {
 		 return sitdown;
 	 }
 	 
+	 /*
+	  * è®¾ç½®çŠ¶æ€
+	  */
 	 public void setSitDownState(SitDownAndUp state)
 	 {
 		 this.sitdown=state;
 	 }
 	 
-	 private ChannelHandlerContext ctx;//Í¨ĞÅ¹ÜµÀ 
+	 private ChannelHandlerContext ctx;//Í¨é€šä¿¡ç®¡é“ 
 	 
 	 public ChannelHandlerContext getHandlerContext()
 	 {
@@ -73,34 +68,47 @@ public class User {
 	 }
 	 
 	 /**
-	  * ÉèÖÃÍ¨ĞÅ¹ÜµÀ
+	  * è®¾ç½®é€šä¿¡ç®¡é“
 	  * @param ctx
 	  */
 	 public void setChannelHandler(ChannelHandlerContext ctx){
 		 this.ctx=ctx;
 	 }
 	
-	 private Room room=null;//Íæ¼ÒËùÔÚ·¿¼ä
+	 private int roomindex=0;//åœ¨æˆ¿é—´çš„åºå·ï¼Œæ„æ€æ˜¯æ¡Œä¸Šçš„åºå·
+	 
+	 public void setRoomIndex(int roomindex)
+	 {
+	     this.roomindex=roomindex;
+	 }
+	 
+	 public int getRoomIndex()
+	 {
+		 return this.roomindex;
+	 }
+	 
+	 private Room room=null;//æˆ¿é—´
 	 
 	 public Room getRoom()
 	 {
 		 return room;
 	 }
 	 
-	 /**
-	  * »ñÈ¡ÓÎÏ·¿ªÊ¼Ç°Êı¾İ
-	  */
-	 public ResponseMessage getBeforeGameMessage()
+	 public void setRoom(Room room)
 	 {
-		 ObjectToBytes objecttobytes=new ObjectToBytes();
-		 objecttobytes.writeInt(getId());
-		 objecttobytes.writeString(getName());
-		 objecttobytes.writeInt(getRoomIndex());
-		 return new ResponseMessage(ResponseHandlerId._beforegame.ordinal(),objecttobytes.getBytes());
+		 this.room=room;
+	 }
+	 
+	 /*
+	  * å°†è‡ªå·±æ·»åŠ åˆ°æˆ¿é—´
+	  */
+	 public void addToRoom(Room room)
+	 {
+		 room.addUser(this);
 	 }
 	 
 	 /**
-	  * ·¢ËÍÊı¾İ
+	  * å‘é€æ¶ˆæ¯
 	  * @param message
 	  */
 	 public void Send(ResponseMessage message)

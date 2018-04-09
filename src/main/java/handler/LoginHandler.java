@@ -1,5 +1,6 @@
 package handler;
 
+import logic.Manager.UserManager;
 import net.ResponseMessage;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 import constant.ResponseHandlerId;
+import core.GlobalData;
 import Protos.RichManProto;
 import domain.GameRequest;
 
@@ -36,13 +38,25 @@ public class LoginHandler implements GameHandler {
 			e.printStackTrace();
 		}
 		System.out.println(login.getToken()+"--->>"+login.getName()+"--->>"+login.getSex());
-	
-		RichManProto.LoginResponse.Builder loginresult=RichManProto.LoginResponse.newBuilder();
-		loginresult.setErrormessage("");
-		loginresult.setSuccess(true);
-		byte[] resultdata=loginresult.build().toByteArray();
-	    ResponseMessage message=new ResponseMessage(ResponseHandlerId._addtoroom.getValue(),resultdata);
-	    paramGameRequest.GetChannelContext().writeAndFlush(message);
+		RichManProto.LoginResponse.Builder loginresult = RichManProto.LoginResponse
+				.newBuilder();
+		UserManager.getInstance().getUser(paramGameRequest.GetChannelContext()).setName(login.getName());
+	    logger.info("玩家名为:"+login.getName()+"登录!");
+		if (UserManager.getInstance().getUserCount() > GlobalData.maxcount) {
+			loginresult.setErrormessage("人数已满");
+			loginresult.setSuccess(false);
+			logger.info("人数已满,不允许登录!");
+		}
+		else
+		{
+			loginresult.setErrormessage("");
+			loginresult.setSuccess(false);
+			logger.info("登录成功");
+		}
+		byte[] resultdata = loginresult.build().toByteArray();
+		ResponseMessage message = new ResponseMessage(
+				ResponseHandlerId._addtoroom.getValue(), resultdata);
+		paramGameRequest.GetChannelContext().writeAndFlush(message);
 		
 	}
 }

@@ -20,9 +20,9 @@ import logic.Enums.SitDownAndUp;
 /*
 @author YHL
 @qq: 1357098586
-@version ´´½¨Ê±¼ä£º2018Äê1ÔÂ25ÈÕ ÏÂÎç3:58:28 
+@version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018ï¿½ï¿½1ï¿½ï¿½25ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½3:58:28 
 
-×À×Ó¹ÜÀí
+ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½
 
  */
 
@@ -30,13 +30,13 @@ public class RoomManager {
 
 	private Logger logger=LoggerFactory.getLogger(getClass());
 	
-	private  final int roomnostep=10;//Ã¿´Î¼Ó10
+	private  final int roomnostep=10;//Ã¿ï¿½Î¼ï¿½10
 	
-	private AtomicInteger roomnoincreasing=new AtomicInteger(100000);//Ô­×Ó²Ù×÷¼ÓËø
+	private AtomicInteger roomnoincreasing=new AtomicInteger(100000);//Ô­ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	private static RoomManager _instance=new RoomManager();
 	
-	private  final Object lockobj=new Object();//Ëø
+	private  final Object lockobj=new Object();//ï¿½ï¿½
 	
 	private RoomManager()
 	{
@@ -51,8 +51,8 @@ public class RoomManager {
 	private ConcurrentHashMap<Integer,Room> rooms=new ConcurrentHashMap<Integer,Room>();
 	
     /**
-     * ´´½¨·¿¼ä
-     * @return ·¿¼äºÅ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½
      */
 	public int createRoom()
 	{
@@ -63,36 +63,35 @@ public class RoomManager {
 	}
 	
 	/**
-	 * ¼ÓÈëµ½·¿¼ä
+	 * åŠ å…¥æˆ¿é—´
 	 * 
 	 * @param roomid
-	 *            ·¿¼äºÅ
+	 *       
 	 */
-	public void addToRoom(int roomid, User user) {
+	public void JoinRoom(int roomid, User user) {
 		
 		if(roomid==-1 || user==null)
 		{
-			logger.info("¼ÓÈë·¿¼äÌõ¼ş²»Âú×ã: roomid:"+roomid+ "user:"+ user);
+			logger.info("è¯·æ±‚ç™»å½•æ¶ˆæ¯: roomid:"+roomid+ "user:"+ user);
 			return;
 		}
 		synchronized (lockobj) {
 			if (rooms.containsKey(roomid)) {
 				rooms.get(roomid).addUser(user);
-				
 				ResponseMessage message=new ResponseMessage(
 					ResponseHandlerId._addtoroom.ordinal(),null);
 				
 			} else {
 				ResponseMessage message = new ResponseMessage(
 						ResponseHandlerId._nofindroom.ordinal(), null);
-				logger.info("Î´ÕÒµ½·¿¼äºÅ:"+roomid);
+				logger.info("æœªæ‰¾åˆ°æˆ¿é—´:"+roomid);
 				user.Send(message);
 			}
 		}
 	}
 
 	/**
-	 * Àë¿ª·¿¼ä
+	 * ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½
 	 * @param roomid
 	 * @param user
 	 */
@@ -105,21 +104,21 @@ public class RoomManager {
 			} else {
 				ResponseMessage message = new ResponseMessage(
 						ResponseHandlerId._nofindroom.ordinal(), null);
-				logger.info("Î´ÕÒµ½·¿¼äºÅ:"+roomid);
+				logger.info("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+roomid);
 				user.Send(message);
 			}
 		}
 	}
 	
 	/*
-	 * ½âÉ¢·¿¼ä
+	 * ï¿½ï¿½É¢ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void dissolutionRoom(int roomid,User user) {
 		synchronized (lockobj) {
 			if (rooms.containsKey(roomid)) {
 				rooms.remove(roomid);
 			} else {
-				logger.error("Òì³£:Î´ÕÒµ½·¿¼äºÅ" + roomid);
+				logger.error("ï¿½ì³£:Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + roomid);
 				ResponseMessage message = new ResponseMessage(
 			    ResponseHandlerId._nofindroom.ordinal(), null);
 				user.Send(message);
